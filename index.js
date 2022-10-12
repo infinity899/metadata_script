@@ -35,6 +35,7 @@ const createCollection = async () => {
         names.forEach(name => {
           fs.readdir(`${assetsFolder}/${rarity}/${name}`, (err, images) => {
             images.forEach( image => {
+              const index = parseFloat(image.replace('.jpg', ''))
               let nft = {}
               nft.name = `DecentriaGenesis#${image.replace('.jpg', '')}`;
               nft.image = `"ipfs://NewUriToReplace/${image}"`;
@@ -52,7 +53,7 @@ const createCollection = async () => {
                 "trait_type": "Type",
                 value: rarity
               }
-              collection.push(nft)
+              collection[index - 1] = nft
             })
           });
         })
